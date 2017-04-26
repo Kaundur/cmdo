@@ -19,13 +19,12 @@ class DAL:
                       priority int)''')
         self.database_connection.commit()
 
-    def get_list(self):
+    def get_cmdo_list(self):
         cursor = self.database_connection.cursor()
-        todo_list = cursor.execute('SELECT rowid, date, title, priority FROM todo_list')
+        cmdo_list = cursor.execute('SELECT rowid, date, title, priority FROM todo_list')
+        return cmdo_list
 
-        return todo_list
-
-    def add_to_list(self, message, priority=0):
+    def add_to_cmdo_list(self, message, priority=0):
         cursor = self.database_connection.cursor()
         print 'Added "'+message+'" to todo list with priority',priority
         cursor.execute("INSERT INTO todo_list (title, priority) VALUES (?,0 )", (message,))
