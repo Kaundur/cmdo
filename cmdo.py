@@ -3,18 +3,28 @@ import sys
 import argparse
 
 import display
-import database_abstraction_layer
+import dal
 
 
 class TodoList:
     def __init__(self):
         self.parser = argparse.ArgumentParser(description='')
-        args = self.parser.parse_args()
+        # args = self.parser.parse_args()
 
-        print args
-        self.dal = database_abstraction_layer.DatabaseAbstractionLayer()
+        self.dal = dal.DAL()
 
         self.display = display.Display()
+
+        self.parser.add_argument("add", help="", type=str)
+        args = self.parser.parse_args()
+        print args.add
+        #
+        # parser = argparse.ArgumentParser()
+        # parser.add_argument("square", help="display a square of a given number",
+        #                     type=int)
+        # args = parser.parse_args()
+        # print args.square ** 2
+
 
         # self.handle_arguments()
 

@@ -1,6 +1,7 @@
 import sqlite3
 
-class DatabaseAbstractionLayer:
+
+class DAL:
     def __init__(self):
         self.database_name = 'example.db'
         self.database_connection = sqlite3.connect(self.database_name)
