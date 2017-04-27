@@ -3,7 +3,7 @@ import sqlite3
 
 class DAL:
     def __init__(self):
-        self.database_name = 'example.db'
+        self.database_name = 'cmdo.db'
         self.database_connection = sqlite3.connect(self.database_name)
         self.initalise_database()
 
