@@ -16,7 +16,8 @@ class TodoList:
 
         self.parser.add_argument('-l', '--list', help="", action="store_true")
         self.parser.add_argument('-a', '--add', help="", type=str)
-        self.parser.add_argument('-r', '--remove', help="", type=str)
+        self.parser.add_argument('-r', '--remove', help="", type=int)
+        self.parser.add_argument('-d', '--done', help="", type=int)
         args = self.parser.parse_args()
         self.handle_arguments(args)
 
@@ -24,15 +25,20 @@ class TodoList:
 
 
     def handle_arguments(self, args):
-        
-        if args.list:
-            cmdo_list = self.dal.get_cmdo_list()
-            self.display.show_list(cmdo_list)
 
+        if args.list:
+            self.display_list()
         if args.add:
             self.dal.add_to_cmdo_list(args.add)
         if args.remove:
             self.dal.remove_by_id(args.remove)
+        if args.done:
+            self.dal.mark_as_done(args.done)
+            self.display_list()
+
+    def display_list(self):
+        cmdo_list = self.dal.get_cmdo_list()
+        self.display.show_list(cmdo_list)
 
 td_list = TodoList()
 

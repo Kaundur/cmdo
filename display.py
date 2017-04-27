@@ -3,11 +3,14 @@ class Display:
     def __init__(self):
         self.display_width = 80
         # TODO - Later this should be pulled from the database
-        self.title = ['ID', 'Title', 'Details', 'Date']
-        self.layout = ['id', 'title', 'details', 'date']
+        #self.title = ['ID', 'Title', 'Details', 'Date']
+        self.title = ['Done', 'ID', 'Title', 'Date']
+        #self.layout = ['id', 'title', 'details', 'date']
+        self.layout = ['complete', 'id', 'title', 'date']
         self.layout_format = {'id': {'length': 5},
                               'title': {'length': 20},
-                              'details': {'length': 30},
+                              #'details': {'length': 30},
+                              'complete': {'length': 10},
                               'date': {'length': 25},
                        }
 
@@ -30,6 +33,7 @@ class Display:
         print '='*self.display_width
         row = ''
         for i, row_item in enumerate(self.layout):
+
             value = self.title[i]
             row += self.row_layout[i].format(value)
         print row
@@ -38,10 +42,16 @@ class Display:
     def print_row(self, data):
         row = ''
         for i, row_item in enumerate(self.layout):
-            # print data
             item_length = self.layout_format[row_item]['length']
             if row_item in data:
-                value = self.truncate_string(data[row_item], item_length)
+                value = data[row_item]
+                if row_item == 'complete':
+                    if value == 0:
+                        value = '\xE2\x98\x90'
+                    else:
+                        value = '\xE2\x98\x91'
+                else:
+                    value = self.truncate_string(value, item_length)
             else:
                 value = ''
             row += self.row_layout[i].format(value)
@@ -63,9 +73,9 @@ class Display:
 
 
     def format_list(self, todo_list):
-        # TODO - Should be moved to outside the dal
         # Format the return of the database into an array of dictionaries
+        # TODO - Is there a better way of doing this?
         formatted_list = []
         for row in todo_list:
-            formatted_list.append({'id': row[0], 'date': row[1], 'title': row[2]})
+            formatted_list.append({'id': row[0], 'date': row[1], 'title': row[2], 'complete': row[4]})
         return formatted_list
