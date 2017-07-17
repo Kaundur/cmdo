@@ -23,11 +23,27 @@ class DAL:
                       )''')
         self.database_connection.commit()
 
+    def dict_factory(self, cursor, row):
+        d = {}
+        for idx, col in enumerate(cursor.description):
+            d[col[0]] = row[idx]
+        return d
+
     def get_cmdo_list(self):
+        self.database_connection.row_factory = self.dict_factory
         cursor = self.database_connection.cursor()
-        # TODO - This doesnt link to the interface well, have to define everything here as well as in display
-        cmdo_list = cursor.execute('SELECT rowid, date, title, priority, complete, due FROM todo_list')
-        return cmdo_list
+        cursor.execute("select * FROM todo_list")
+        return cursor.fetchall()
+
+    def _format_list(self, cmdo_list, format):
+        # Formats the array into a dictionary, could this be built in?
+        rows = []
+        for sql_row in cmdo_list:
+            row = {}
+            for i, column in enumerate(format):
+                row[column] = sql_row[i]
+            rows.append(row)
+        return rows
 
     def add_to_cmdo_list(self, message, due_date, priority=0):
         cursor = self.database_connection.cursor()
