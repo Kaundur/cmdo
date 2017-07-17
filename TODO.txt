@@ -23,3 +23,6 @@ Check if ncurses is a better choice for interface
 Message for empty list
 
 support multiple operations
+
+Possible to watermark logo? < Maybe with ncurses
+    Get x,y size?

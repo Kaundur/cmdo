@@ -15,11 +15,31 @@ class Display:
                               'due': {'length': 50},
                        }
 
+    def print_row(self, data):
+        row = ''
+        for layout in self.layout:
+            if layout in self.layout_format and layout in data:
+                value = data[layout]
+                layout_format = self.layout_format[layout]
+                layout_length = layout_format['length']
+                # item_length = self.layout_format[layout_format]['length']
+                # row_layout.append('{:<' + str(item_length) + '}')
+                row += ('{:<'+str(layout_length)+'}').format(value)
+        print row
+
+
     def show_list(self, todo_list):
         if todo_list:
-
             for row in todo_list:
-                print row
+                self.print_row(row)
+
+
+
+
+        else:
+            pass
+            # TODO - Display empty message
+
             # todo_list = self.format_list(todo_list)
             # self.print_header()
             #
@@ -29,8 +49,6 @@ class Display:
             # print '-' * self.display_width
 
 
-    def format_list(self):
-        pass
 
     def clear_terminal(self):
         os.system('cls' if os.name == 'nt' else 'clear')
