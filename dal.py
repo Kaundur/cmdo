@@ -32,7 +32,7 @@ class DAL:
     def get_cmdo_list(self):
         self.database_connection.row_factory = self.dict_factory
         cursor = self.database_connection.cursor()
-        cursor.execute("select * FROM todo_list")
+        cursor.execute("select rowid, * FROM todo_list")
         return cursor.fetchall()
 
     def _format_list(self, cmdo_list, format):

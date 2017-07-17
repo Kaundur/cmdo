@@ -6,13 +6,14 @@ class Display:
         self.display_width = 80
         # TODO - Later this should be pulled from the database
 
-        self.title = ['Done', 'ID', 'Title', 'Date entered', 'Due']
-        self.layout = ['complete', 'id', 'title', 'date', 'due']
-        self.layout_format = {'id': {'length': 5},
+        # self.title = ['ID', 'Done' 'Title', 'Date entered', 'Due']
+        self.layout = ['rowid', 'complete', 'priority', 'title', 'due', 'date']
+        self.layout_format = {'rowid': {'length': 5},
                               'title': {'length': 20},
                               'complete': {'length': 10},
                               'date': {'length': 25},
                               'due': {'length': 50},
+                              'priority': {'length': 10}
                        }
 
     def print_row(self, data):
@@ -22,19 +23,25 @@ class Display:
                 value = data[layout]
                 layout_format = self.layout_format[layout]
                 layout_length = layout_format['length']
-                # item_length = self.layout_format[layout_format]['length']
-                # row_layout.append('{:<' + str(item_length) + '}')
-                row += ('{:<'+str(layout_length)+'}').format(value)
+                value = self.format_value(value, layout)
+                row += self.truncate_value(value, layout_length)
         print row
 
+    def format_value(self, value, item):
+        if item == 'complete':
+            if value:
+                value = '[x]'
+            else:
+                value = '[ ]'
+        return value
+
+    def truncate_value(self, value, format_length):
+        return ('{:<' + str(format_length) + '}').format(value)
 
     def show_list(self, todo_list):
         if todo_list:
             for row in todo_list:
                 self.print_row(row)
-
-
-
 
         else:
             pass
@@ -54,6 +61,7 @@ class Display:
         os.system('cls' if os.name == 'nt' else 'clear')
 
     def display_welcome(self):
+        self.clear_terminal()
         print '_________          _________'
         print '__  ____/______ _________  /_____'
         print '_  /    __  __ `__ \  __  /_  __ \ '
