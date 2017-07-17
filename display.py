@@ -86,7 +86,8 @@ class Display:
 
                     # print datetime.datetime.strptime(value, "%Y-%d-%m %H:%M:%S.%f")
                     if item_date.date() == datetime.date.today():
-                        value = '<'+value+'>'
+                        value = '<Today>'
+                        # value = '<'+value+'>'
                         # value = termcolor.colored(value, 'red')
                         # # Seems to reset to green. could add a config to set this
                         # termcolor.RESET()
