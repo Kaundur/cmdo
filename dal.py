@@ -19,6 +19,7 @@ class DAL:
                       title text,
                       priority int,
                       due DATE,
+                      description text,
                       complete BOOLEAN NOT NULL CHECK (complete IN (0, 1)) DEFAULT (0)
                       )''')
         self.database_connection.commit()
@@ -45,6 +46,34 @@ class DAL:
             rows.append(row)
         return rows
 
+    def add_description(self, item_id, description):
+        try:
+            item_id = int(item_id)
+            cursor = self.database_connection.cursor()
+            description = ' '.join(description)
+
+            # print description
+            cursor.execute("UPDATE todo_list SET description = ? WHERE rowid = ?", (description, item_id,))
+            self.database_connection.commit()
+            # cursor.execute("SELECT * FROM todo_list")
+            # print cursor.fetchall()
+            # print self.get_cmdo_list()
+
+        except ValueError:
+            print 'ID of item should be the first element supplied to description'
+
+
+
+
+
+
+    def get_item_description(self, rowid):
+        self.database_connection.row_factory = self.dict_factory
+        cursor = self.database_connection.cursor()
+        cursor.execute("select rowid, * FROM todo_list WHERE rowid = ?", (rowid, ))
+        # There can only be one
+        return cursor.fetchone()
+
     def add_to_cmdo_list(self, message, due_date, priority=0):
         cursor = self.database_connection.cursor()
         print 'Added "'+message+'" to todo list with priority', priority
@@ -62,6 +91,9 @@ class DAL:
         # User could try to do multiple deletes, maybe its better to add it on the getlist call
         # self.database_connection.execute("VACUUM")
         self.database_connection.commit()
+
+    def vacuum_id(self):
+        self.database_connection.execute("VACUUM")
 
     def mark_as_done(self, item_id):
         cursor = self.database_connection.cursor()

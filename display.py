@@ -33,24 +33,13 @@ class Display:
             else:
                 value = '[ ]'
         if item == 'due':
-            value = self.__get_date(value)
-
+            if value is not None:
+                value = self.__get_date(value)
+            else:
+                value = ''
         return value
 
-    def __get_date(self, date_string):
-        # TODO - need to handle multiple formats of date
-        item_date = datetime.datetime.strptime(date_string, "%Y-%m-%d")
 
-        if item_date.date() == datetime.date.today():
-            return 'Today'
-        elif item_date.date() == datetime.date.today() + datetime.timedelta(days=1):
-            return 'Tomorrow'
-        else:
-            # Check if the day is during the next few days, return day name if so
-            for i in range(2, 7):
-                if item_date.date() == datetime.date.today() + datetime.timedelta(days=i):
-                    return item_date.date().strftime("%A")
-        return date_string
 
     def truncate_value(self, value, format_length):
         return ('{:<' + str(format_length) + '}').format(value)
@@ -74,6 +63,14 @@ class Display:
             #
             # print '-' * self.display_width
 
+    def display_details(self, row):
+        self.print_row(row)
+        if row['description'] is not None:
+            print 'Description'
+            print "\t"+row['description']
+        else:
+            print 'No description added'
+            print row
 
 
     def clear_terminal(self):
@@ -94,3 +91,18 @@ class Display:
         print '/ /___  _  / / / / / /_/ / / /_/ /'
         print '\____/  /_/ /_/ /_/\__,_/  \____/'
         print ''
+
+    def __get_date(self, date_string):
+        # TODO - need to handle multiple formats of date
+        item_date = datetime.datetime.strptime(date_string, "%Y-%m-%d")
+
+        if item_date.date() == datetime.date.today():
+            return 'Today'
+        elif item_date.date() == datetime.date.today() + datetime.timedelta(days=1):
+            return 'Tomorrow'
+        else:
+            # Check if the day is during the next few days, return day name if so
+            for i in range(2, 7):
+                if item_date.date() == datetime.date.today() + datetime.timedelta(days=i):
+                    return item_date.date().strftime("%A")
+        return date_string

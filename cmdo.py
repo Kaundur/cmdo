@@ -19,6 +19,9 @@ class TodoList:
         self.parser.add_argument('--due', help="", type=str)
         self.parser.add_argument('-r', '--remove', help="", type=int)
         self.parser.add_argument('-d', '--done', help="", type=int)
+        self.parser.add_argument('-v', '--view', help="", type=int)
+        self.parser.add_argument('--description', help="", nargs="*")
+        self.parser.add_argument('--vacuum', help="", action="store_true")
         self.parser.add_argument('-t', '--debug', help="",  action="store_true")
         args = self.parser.parse_args()
 
@@ -40,7 +43,7 @@ class TodoList:
 
 
     def handle_arguments(self, args):
-
+        # TODO - Display list is happening too many times here, it could be called multiple times depending on the operation
         if args.list:
             self.display_list()
         if args.add:
@@ -56,6 +59,18 @@ class TodoList:
             self.display_list()
         if args.debug:
             self.dal.dump_database()
+        if args.vacuum:
+            self.dal.vacuum_id()
+            self.display_list()
+        if args.view:
+            self.display_details(args.view)
+        if args.description:
+            # Split the args into the id and description
+            self.dal.add_description(args.description[0], args.description[1::])
+
+
+    def display_details(self, item_id):
+        self.display.display_details(self.dal.get_item_description(item_id))
 
 
     def display_list(self):
