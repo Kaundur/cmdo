@@ -15,11 +15,11 @@ class TodoList:
         self.display = display.Display()
 
         self.parser.add_argument('-l', '--list', help="", action="store_true")
-        self.parser.add_argument('-a', '--add', help="", type=str)
+        self.parser.add_argument('-a', '--add', help="", type=str, nargs="+")
         self.parser.add_argument('--due', help="", type=str)
         self.parser.add_argument('-r', '--remove', help="", type=int)
         self.parser.add_argument('-d', '--done', help="", type=int)
-        self.parser.add_argument('--todo', help="", type=int) # Revert done
+        self.parser.add_argument('--todo', help="", type=int)  # Revert done
         self.parser.add_argument('-v', '--view', help="", type=int)
         self.parser.add_argument('-t', '--debug', help="",  action="store_true")
         self.parser.add_argument('--description', help="", nargs="*")
@@ -49,6 +49,7 @@ class TodoList:
         if args.list:
             self.display_list()
         if args.add:
+            # TODO - Should handle description here as well
             due_date = None
             if args.due:
                 due_date = args.due

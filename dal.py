@@ -75,6 +75,7 @@ class DAL:
         return cursor.fetchone()
 
     def add_to_cmdo_list(self, message, due_date, priority=0):
+        message = ' '.join(message)
         cursor = self.database_connection.cursor()
         print 'Added "'+message+'" to todo list with priority', priority
         if due_date:

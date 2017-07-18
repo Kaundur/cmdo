@@ -6,7 +6,7 @@ class Display:
         self.display_width = 80
         # TODO - Later this should be pulled from the database
 
-        self.layout = ['rowid', 'complete', 'priority', 'title', 'due']
+        self.layout = ['rowid', 'complete', 'title', 'due']
         self.layout_format = {'rowid': {'length': 5},
                               'title': {'length': 20},
                               'complete': {'length': 10},
@@ -48,7 +48,6 @@ class Display:
         if todo_list:
             for row in todo_list:
                 self.print_row(row)
-
         else:
             print "\tCmdo list is empty - A new item can be added through --add item"
 
@@ -60,7 +59,6 @@ class Display:
         else:
             print 'No description added'
             print row
-
 
     def clear_terminal(self):
         os.system('cls' if os.name == 'nt' else 'clear')
