@@ -88,12 +88,18 @@ class DAL:
     def _get_date_from_string(self, date_string):
         # item_date = datetime.datetime.strptime(date_string, "%Y-%m-%d")
         today = datetime.date.today()
+
+        days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
         if date_string.lower() == 'today':
             return today
         if date_string.lower() == 'tomorrow':
             return today+datetime.timedelta(days=1)
-
-
+        if date_string.lower() in days:
+            for i in range(1, 8):
+                next_day = today + datetime.timedelta(days=i)
+                next_day_string = next_day.strftime("%A")
+                if date_string.lower() == next_day_string.lower():
+                    return next_day
 
         return date_string
 
