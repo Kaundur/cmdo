@@ -19,10 +19,12 @@ class TodoList:
         self.parser.add_argument('--due', help="", type=str)
         self.parser.add_argument('-r', '--remove', help="", type=int)
         self.parser.add_argument('-d', '--done', help="", type=int)
+        self.parser.add_argument('--todo', help="", type=int) # Revert done
         self.parser.add_argument('-v', '--view', help="", type=int)
+        self.parser.add_argument('-t', '--debug', help="",  action="store_true")
         self.parser.add_argument('--description', help="", nargs="*")
         self.parser.add_argument('--vacuum', help="", action="store_true")
-        self.parser.add_argument('-t', '--debug', help="",  action="store_true")
+
         args = self.parser.parse_args()
 
         if self.check_arguments(args):
@@ -54,9 +56,14 @@ class TodoList:
         if args.remove:
             self.dal.remove_by_id(args.remove)
             self.display_list()
+
         if args.done:
             self.dal.mark_as_done(args.done)
             self.display_list()
+        if args.todo:
+            self.dal.mark_as_todo(args.todo)
+            self.display_list()
+
         if args.debug:
             self.dal.dump_database()
         if args.vacuum:

@@ -98,8 +98,13 @@ class DAL:
     def mark_as_done(self, item_id):
         cursor = self.database_connection.cursor()
         cursor.execute("UPDATE todo_list SET complete = 1 WHERE rowid = ?", (item_id,))
-
         self.database_connection.commit()
+
+    def mark_as_todo(self, item_id):
+        cursor = self.database_connection.cursor()
+        cursor.execute("UPDATE todo_list SET complete = 0 WHERE rowid = ?", (item_id,))
+        self.database_connection.commit()
+
 
     def dump_database(self):
         cursor = self.database_connection.cursor()
