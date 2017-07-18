@@ -25,6 +25,7 @@ class TodoList:
         if self.check_arguments(args):
             self.handle_arguments(args)
         else:
+            self.display.clear_terminal()
             self.display.display_welcome()
 
         self.dal.close_connection()
@@ -46,10 +47,10 @@ class TodoList:
             due_date = None
             if args.due:
                 due_date = args.due
-
             self.dal.add_to_cmdo_list(args.add, due_date)
         if args.remove:
             self.dal.remove_by_id(args.remove)
+            self.display_list()
         if args.done:
             self.dal.mark_as_done(args.done)
             self.display_list()
