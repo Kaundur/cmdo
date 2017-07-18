@@ -79,11 +79,23 @@ class DAL:
         cursor = self.database_connection.cursor()
         print 'Added "'+message+'" to todo list with priority', priority
         if due_date:
-            # due_date = datetime.datetime.today()
+            due_date = self._get_date_from_string(due_date)
             cursor.execute("INSERT INTO todo_list (title, priority, due) VALUES (?, ?, ? )", (message, priority, due_date, ))
         else:
             cursor.execute("INSERT INTO todo_list (title, priority) VALUES (?, ? )", (message, priority,))
         self.database_connection.commit()
+
+    def _get_date_from_string(self, date_string):
+        # item_date = datetime.datetime.strptime(date_string, "%Y-%m-%d")
+        today = datetime.date.today()
+        if date_string.lower() == 'today':
+            return today
+        if date_string.lower() == 'tomorrow':
+            return today+datetime.timedelta(days=1)
+
+
+
+        return date_string
 
     def remove_by_id(self, item_id):
         cursor = self.database_connection.cursor()
