@@ -39,8 +39,6 @@ class Display:
                 value = ''
         return value
 
-
-
     def truncate_value(self, value, format_length):
         return ('{:<' + str(format_length) + '}').format(value)
 
@@ -52,16 +50,7 @@ class Display:
                 self.print_row(row)
 
         else:
-            pass
-            # TODO - Display empty message
-
-            # todo_list = self.format_list(todo_list)
-            # self.print_header()
-            #
-            # for row in todo_list:
-            #     self.print_row(row)
-            #
-            # print '-' * self.display_width
+            print "\tCmdo list is empty - A new item can be added through --add item"
 
     def display_details(self, row):
         self.print_row(row)
