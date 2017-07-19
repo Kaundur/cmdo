@@ -35,6 +35,8 @@ class Display:
 
     def color_value(self, value, item):
         if item == 'due':
+            if 'ago' in value:
+                value = term.color(value, 'DANGER')
             if 'Today' in value:
                 value = term.color(value, 'DANGER')
             if 'Tomorrow' in value:
@@ -97,6 +99,16 @@ class Display:
     def __get_date(self, date_string):
         # TODO - need to handle multiple formats of date
         item_date = datetime.datetime.strptime(date_string, "%Y-%m-%d")
+        today = datetime.date.today()
+
+        delta = item_date.date() - today
+
+
+        if delta.days < 0:
+            if delta.days == -1:
+                return '1 day ago'
+            return str(abs(delta.days)) + ' days ago'
+
 
         if item_date.date() == datetime.date.today():
             return 'Today'
