@@ -60,8 +60,12 @@ class DAL:
 
 
 
+    def clean_database(self):
 
-
+        # TODO - Archive everything marked as done
+        # Should also accept ids, then only archive that item
+        # Should prompt user on mass archive
+        pass
 
     def get_item_description(self, rowid):
         self.database_connection.row_factory = self.dict_factory

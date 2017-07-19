@@ -21,10 +21,13 @@ class TodoList:
         self.parser.add_argument('-r', '--remove', help="", type=int)
         self.parser.add_argument('-d', '--done', help="", type=int)
         self.parser.add_argument('--undone', help="", type=int)  # Revert done
-        self.parser.add_argument('-v', '--view', help="", type=int)
+        # should be 0 or 1 arg here
+        self.parser.add_argument('-v', '--view', help="", type=int, nargs='*')
+        # self.parser.add_argument('-v', '--view', help="", type=int)
         self.parser.add_argument('-t', '--debug', help="",  action="store_true")
         self.parser.add_argument('--description', help="", nargs="*")
         self.parser.add_argument('--vacuum', help="", action="store_true")
+        self.parser.add_argument('--clean', help="")
 
         args = self.parser.parse_args()
 
@@ -75,10 +78,12 @@ class TodoList:
         if args.vacuum:
             self.dal.vacuum_id()
             display_list = True
-        if args.view:
-            self.display_details(args.view)
 
-        if args.list or display_list:
+        if args.clean:
+            self.dal.clean_database()
+        if args.view:
+            self.display_details(args.view[0])
+        if display_list:
             self.display_list()
 
     def display_details(self, item_id):
