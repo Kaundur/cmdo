@@ -19,7 +19,7 @@ class DAL:
                       title text,
                       priority int,
                       due DATE,
-                      description text,
+                      description text DEFAULT '',
                       complete BOOLEAN NOT NULL CHECK (complete IN (0, 1)) DEFAULT (0)
                       )''')
         self.database_connection.commit()
