@@ -2,7 +2,18 @@
 # TOOD - Are these valid on unix
 # http://misc.flogisoft.com/bash/tip_colors_and_formatting
 
-WARNING = '\033[91m'
+colors = {
+    'DANGER': '\033[91m',
+    'WARNING': '\033[33m',
+    'RESET': '\033[0m',
+}
+
+def color(text, color):
+    if color in colors:
+        return ''.join([colors[color], text, colors['RESET']])
+    return text
+
+
 # HEADER = '\033[95m'
 # OKBLUE = '\033[94m'
 # OKGREEN = '\033[92m'
@@ -14,4 +25,4 @@ WARNING = '\033[91m'
 # NORMAL = '\033[0m'
 
 # This could be the reset command in windows, currently using os.system('color')
-RESET = '\033[0m'
+

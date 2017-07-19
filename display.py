@@ -35,7 +35,9 @@ class Display:
     def color_value(self, value, item):
         if item == 'due':
             if 'Today' in value:
-                value = ''.join([term.WARNING, value, term.RESET])
+                value = term.color(value, 'DANGER')
+            if 'Tomorrow' in value:
+                value = term.color(value, 'WARNING')
         return value
 
     def format_value(self, value, item):
