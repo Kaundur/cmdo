@@ -13,9 +13,9 @@ class Display:
                               'title': {'length': 20},
                               'complete': {'length': 10},
                               'date': {'length': 25},
-                              'due': {'length': 20},
+                              'due': {'length': 15},
                               'priority': {'length': 10},
-                              'description': {'length': 10}
+                              'description': {'length': 20}
                        }
 
     def print_row(self, data):
@@ -52,9 +52,9 @@ class Display:
         return value
 
     def truncate_value(self, value, format_length):
-        # if len(str(value)) > format_length:
-        #     return ('{:<' + str(format_length-3) + '}').format(value)+'...'
-        return ('{:<' + str(format_length-3) + '}').format(value)
+        if len(str(value)) > format_length:
+            value = (value[:format_length-3] + '...')
+        return ('{:<' + str(format_length) + '}').format(value)
 
     def show_list(self, todo_list):
         self.clear_terminal()
