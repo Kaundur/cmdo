@@ -3,14 +3,15 @@ import datetime
 
 import term
 
+
 class Display:
     def __init__(self):
         self.display_width = 80
         # TODO - Later this should be pulled from the database
 
-        self.layout = ['rowid', 'complete', 'title', 'due', 'description']
+        self.layout = ['rowid', 'complete', 'title', 'due']
         self.layout_format = {'rowid': {'length': 5},
-                              'title': {'length': 20},
+                              'title': {'length': 30},
                               'complete': {'length': 10},
                               'date': {'length': 25},
                               'due': {'length': 15},
