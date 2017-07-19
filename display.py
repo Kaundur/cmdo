@@ -70,7 +70,7 @@ class Display:
 
     def display_details(self, row):
         self.print_row(row)
-        if row['description'] is not None:
+        if row['description'] is not None and row['description'] != '':
             print "\t"+row['description']
         else:
             print "\tNo description added. Add a description using --description ID description"

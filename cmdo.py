@@ -47,36 +47,40 @@ class TodoList:
 
 
     def handle_arguments(self, args):
+        display_list = False
         # TODO - Display list is happening too many times here, it could be called multiple times depending on the operation
-        if args.list:
-            self.display_list()
+
         if args.add:
             # TODO - Should handle description here as well
             due_date = None
             if args.due:
                 due_date = args.due
             self.dal.add_to_cmdo_list(args.add, due_date)
+            display_list = True
         if args.description and not args.add:
             # Split the args into the id and description
             self.dal.add_description(args.description[0], args.description[1::])
         if args.remove:
             self.dal.remove_by_id(args.remove)
-            self.display_list()
+            display_list = True
 
         if args.done:
             self.dal.mark_as_done(args.done)
-            self.display_list()
+            display_list = True
         if args.undone:
             self.dal.mark_as_undone(args.undone)
-            self.display_list()
+            display_list = True
 
         if args.debug:
             self.dal.dump_database()
         if args.vacuum:
             self.dal.vacuum_id()
-            self.display_list()
+            display_list = True
         if args.view:
             self.display_details(args.view)
+
+        if args.list or display_list:
+            self.display_list()
 
     def display_details(self, item_id):
         self.display.display_details(self.dal.get_item_description(item_id))
@@ -87,7 +91,6 @@ class TodoList:
 
     def reset_terminal(self):
         # TODO - Check if this works on unix
-        #
         os.system('color')
 
 td_list = TodoList()
