@@ -1,6 +1,8 @@
 import os
 import datetime
 
+import term
+
 class Display:
     def __init__(self):
         self.display_width = 80
@@ -54,11 +56,9 @@ class Display:
     def display_details(self, row):
         self.print_row(row)
         if row['description'] is not None:
-            print 'Description'
             print "\t"+row['description']
         else:
-            print 'No description added'
-            print row
+            print "\tNo description added. Add a description using --description ID description"
 
     def clear_terminal(self):
         os.system('cls' if os.name == 'nt' else 'clear')
@@ -84,7 +84,8 @@ class Display:
         item_date = datetime.datetime.strptime(date_string, "%Y-%m-%d")
 
         if item_date.date() == datetime.date.today():
-            return 'Today'
+            return term.WARNING+'Today'+term.RESET
+
         elif item_date.date() == datetime.date.today() + datetime.timedelta(days=1):
             return 'Tomorrow'
         else:

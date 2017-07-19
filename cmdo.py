@@ -1,6 +1,7 @@
 #!/usr/bin/python
 import sys
 import argparse
+import os
 
 import display
 import dal
@@ -34,6 +35,7 @@ class TodoList:
             self.display.display_welcome()
 
         self.dal.close_connection()
+        self.reset_terminal()
 
     def check_arguments(self, args):
         any_arg_set = False
@@ -54,6 +56,9 @@ class TodoList:
             if args.due:
                 due_date = args.due
             self.dal.add_to_cmdo_list(args.add, due_date)
+        if args.description and not args.add:
+            # Split the args into the id and description
+            self.dal.add_description(args.description[0], args.description[1::])
         if args.remove:
             self.dal.remove_by_id(args.remove)
             self.display_list()
@@ -72,18 +77,18 @@ class TodoList:
             self.display_list()
         if args.view:
             self.display_details(args.view)
-        if args.description:
-            # Split the args into the id and description
-            self.dal.add_description(args.description[0], args.description[1::])
-
 
     def display_details(self, item_id):
         self.display.display_details(self.dal.get_item_description(item_id))
 
-
     def display_list(self):
         cmdo_list = self.dal.get_cmdo_list()
         self.display.show_list(cmdo_list)
+
+    def reset_terminal(self):
+        # TODO - Check if this works on unix
+        #
+        os.system('color')
 
 td_list = TodoList()
 

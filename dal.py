@@ -117,7 +117,7 @@ class DAL:
         cursor.execute("UPDATE todo_list SET complete = 0 WHERE rowid = ?", (item_id,))
         self.database_connection.commit()
 
-
+    # For debug
     def dump_database(self):
         cursor = self.database_connection.cursor()
         cmdo_list = cursor.execute('SELECT * FROM todo_list')
