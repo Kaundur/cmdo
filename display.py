@@ -8,13 +8,14 @@ class Display:
         self.display_width = 80
         # TODO - Later this should be pulled from the database
 
-        self.layout = ['rowid', 'complete', 'title', 'due']
+        self.layout = ['rowid', 'complete', 'title', 'due', 'description']
         self.layout_format = {'rowid': {'length': 5},
                               'title': {'length': 20},
                               'complete': {'length': 10},
                               'date': {'length': 25},
-                              'due': {'length': 50},
-                              'priority': {'length': 10}
+                              'due': {'length': 20},
+                              'priority': {'length': 10},
+                              'description': {'length': 10}
                        }
 
     def print_row(self, data):
@@ -24,9 +25,18 @@ class Display:
                 value = data[layout]
                 layout_format = self.layout_format[layout]
                 layout_length = layout_format['length']
+                # Truncate first, as color formatting counts towards char number
                 value = self.format_value(value, layout)
-                row += self.truncate_value(value, layout_length)
+                value = self.truncate_value(value, layout_length)
+                value = self.color_value(value, layout)
+                row += value
         print row
+
+    def color_value(self, value, item):
+        if item == 'due':
+            if 'Today' in value:
+                value = ''.join([term.WARNING, value, term.RESET])
+        return value
 
     def format_value(self, value, item):
         if item == 'complete':
@@ -34,7 +44,7 @@ class Display:
                 value = '[x]'
             else:
                 value = '[ ]'
-        if item == 'due':
+        elif item == 'due':
             if value is not None:
                 value = self.__get_date(value)
             else:
@@ -42,7 +52,9 @@ class Display:
         return value
 
     def truncate_value(self, value, format_length):
-        return ('{:<' + str(format_length) + '}').format(value)
+        # if len(str(value)) > format_length:
+        #     return ('{:<' + str(format_length-3) + '}').format(value)+'...'
+        return ('{:<' + str(format_length-3) + '}').format(value)
 
     def show_list(self, todo_list):
         self.clear_terminal()
@@ -84,7 +96,7 @@ class Display:
         item_date = datetime.datetime.strptime(date_string, "%Y-%m-%d")
 
         if item_date.date() == datetime.date.today():
-            return term.WARNING+'Today'+term.RESET
+            return 'Today'
 
         elif item_date.date() == datetime.date.today() + datetime.timedelta(days=1):
             return 'Tomorrow'
