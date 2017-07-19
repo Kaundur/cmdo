@@ -19,7 +19,7 @@ class TodoList:
         self.parser.add_argument('--due', help="", type=str)
         self.parser.add_argument('-r', '--remove', help="", type=int)
         self.parser.add_argument('-d', '--done', help="", type=int)
-        self.parser.add_argument('--todo', help="", type=int)  # Revert done
+        self.parser.add_argument('--undone', help="", type=int)  # Revert done
         self.parser.add_argument('-v', '--view', help="", type=int)
         self.parser.add_argument('-t', '--debug', help="",  action="store_true")
         self.parser.add_argument('--description', help="", nargs="*")
@@ -61,8 +61,8 @@ class TodoList:
         if args.done:
             self.dal.mark_as_done(args.done)
             self.display_list()
-        if args.todo:
-            self.dal.mark_as_todo(args.todo)
+        if args.undone:
+            self.dal.mark_as_undone(args.undone)
             self.display_list()
 
         if args.debug:

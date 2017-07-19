@@ -52,12 +52,8 @@ class DAL:
             cursor = self.database_connection.cursor()
             description = ' '.join(description)
 
-            # print description
             cursor.execute("UPDATE todo_list SET description = ? WHERE rowid = ?", (description, item_id,))
             self.database_connection.commit()
-            # cursor.execute("SELECT * FROM todo_list")
-            # print cursor.fetchall()
-            # print self.get_cmdo_list()
 
         except ValueError:
             print 'ID of item should be the first element supplied to description'
@@ -106,9 +102,6 @@ class DAL:
     def remove_by_id(self, item_id):
         cursor = self.database_connection.cursor()
         cursor.execute("DELETE FROM todo_list WHERE rowid = ?", (item_id,))
-        # Vacuum reorders the table, is this desired ?
-        # User could try to do multiple deletes, maybe its better to add it on the getlist call
-        # self.database_connection.execute("VACUUM")
         self.database_connection.commit()
 
     def vacuum_id(self):
@@ -119,7 +112,7 @@ class DAL:
         cursor.execute("UPDATE todo_list SET complete = 1 WHERE rowid = ?", (item_id,))
         self.database_connection.commit()
 
-    def mark_as_todo(self, item_id):
+    def mark_as_undone(self, item_id):
         cursor = self.database_connection.cursor()
         cursor.execute("UPDATE todo_list SET complete = 0 WHERE rowid = ?", (item_id,))
         self.database_connection.commit()
