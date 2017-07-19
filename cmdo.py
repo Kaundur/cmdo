@@ -31,8 +31,7 @@ class TodoList:
         if self.check_arguments(args):
             self.handle_arguments(args)
         else:
-            self.display.clear_terminal()
-            self.display.display_welcome()
+            self.display_list()
 
         self.dal.close_connection()
         self.reset_terminal()

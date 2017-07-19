@@ -66,7 +66,8 @@ class Display:
             for row in todo_list:
                 self.print_row(row)
         else:
-            print "\tCmdo list is empty - A new item can be added through --add item"
+            self.display_welcome()
+
 
     def display_details(self, row):
         self.print_row(row)
@@ -79,7 +80,6 @@ class Display:
         os.system('cls' if os.name == 'nt' else 'clear')
 
     def display_welcome(self):
-        self.display_logo()
         print 'Command List'
         print "\tShow list    --list   -l"
         print "\tAdd item     --add    -a"
