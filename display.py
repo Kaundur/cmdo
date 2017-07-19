@@ -15,7 +15,7 @@ class Display:
                               'date': {'length': 25},
                               'due': {'length': 15},
                               'priority': {'length': 10},
-                              'description': {'length': 20}
+                              'description': {'length': 40}
                        }
 
     def print_row(self, data):
