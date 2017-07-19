@@ -37,6 +37,8 @@ class Display:
         if item == 'due':
             if 'ago' in value:
                 value = term.color(value, 'DANGER')
+            if 'Yesterday' in value:
+                value = term.color(value, 'DANGER')
             if 'Today' in value:
                 value = term.color(value, 'DANGER')
             if 'Tomorrow' in value:
@@ -106,7 +108,7 @@ class Display:
 
         if delta.days < 0:
             if delta.days == -1:
-                return '1 day ago'
+                return 'Yesterday'
             return str(abs(delta.days)) + ' days ago'
 
 
