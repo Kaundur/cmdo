@@ -15,7 +15,6 @@ class TodoList:
 
         self.display = display.Display()
 
-        self.parser.add_argument('-l', '--list', help="", action="store_true")
         self.parser.add_argument('-a', '--add', help="", type=str, nargs="+")
         self.parser.add_argument('--due', help="", type=str)
         self.parser.add_argument('-r', '--remove', help="", type=int)
@@ -23,7 +22,7 @@ class TodoList:
         self.parser.add_argument('--undone', help="", type=int)  # Revert done
         # should be 0 or 1 arg here
         self.parser.add_argument('-v', '--view', help="", type=int, nargs='*')
-        # self.parser.add_argument('-v', '--view', help="", type=int)
+
         self.parser.add_argument('-t', '--debug', help="",  action="store_true")
         self.parser.add_argument('--description', help="", nargs="*")
         self.parser.add_argument('--vacuum', help="", action="store_true")
@@ -34,6 +33,7 @@ class TodoList:
         if self.check_arguments(args):
             self.handle_arguments(args)
         else:
+            # If view is empty itll go here
             self.display_list()
 
         self.dal.close_connection()

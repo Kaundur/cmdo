@@ -37,12 +37,14 @@ class Display:
         if item == 'due':
             if 'ago' in value:
                 value = term.color(value, 'DANGER')
-            if 'Yesterday' in value:
+            elif 'Yesterday' in value:
                 value = term.color(value, 'DANGER')
-            if 'Today' in value:
-                value = term.color(value, 'DANGER')
-            if 'Tomorrow' in value:
+            elif 'Today' in value:
                 value = term.color(value, 'WARNING')
+            elif 'Tomorrow' in value:
+                value = term.color(value, 'MILD')
+            else:
+                value = term.color(value, 'OK')
         return value
 
     def format_value(self, value, item):
