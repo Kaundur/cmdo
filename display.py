@@ -74,11 +74,14 @@ class Display:
 
 
     def display_details(self, row):
-        self.print_row(row)
-        if row['description'] is not None and row['description'] != '':
-            print "\t"+row['description']
+        if row:
+            self.print_row(row)
+            if row['description'] is not None and row['description'] != '':
+                print "\t"+row['description']
+            else:
+                print "\tNo description added. Add a description using --description ID description"
         else:
-            print "\tNo description added. Add a description using --description ID description"
+            print 'No task found'
 
     def clear_terminal(self):
         os.system('cls' if os.name == 'nt' else 'clear')
