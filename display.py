@@ -100,7 +100,10 @@ class Display:
 
     def __get_date(self, date_string):
         # TODO - need to handle multiple formats of date
-        item_date = datetime.datetime.strptime(date_string, "%Y-%m-%d")
+        try:
+            item_date = datetime.datetime.strptime(date_string, "%Y-%m-%d")
+        except:
+            return ''
         today = datetime.date.today()
 
         delta = item_date.date() - today

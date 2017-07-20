@@ -118,6 +118,14 @@ class DAL:
                 if date_string.lower() == next_day_string.lower():
                     return next_day
 
+        try:
+            date = datetime.datetime.strptime(date_string, '%d-%b')
+            date = date.replace(year=today.year)
+            return date.strftime("%Y-%m-%d")
+        except:
+            pass
+        # exit()
+
         return date_string
 
     def remove_by_id(self, item_id):
