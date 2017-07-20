@@ -16,16 +16,20 @@ class TodoList:
         self.display = display.Display()
 
         self.parser.add_argument('-a', '--add', help="", type=str, nargs="+")
-        self.parser.add_argument('--due', help="", type=str)
+
         self.parser.add_argument('-r', '--remove', help="", type=int)
         self.parser.add_argument('-d', '--done', help="", type=int)
         self.parser.add_argument('--undone', help="", type=int)  # Revert done
         # should be 0 or 1 arg here
         self.parser.add_argument('-v', '--view', help="", type=int, nargs='*')
 
-        self.parser.add_argument('-t', '--debug', help="",  action="store_true")
         self.parser.add_argument('--description', help="", nargs="*")
+        self.parser.add_argument('--due', help="", nargs="*")
+
         self.parser.add_argument('--vacuum', help="", action="store_true")
+
+        self.parser.add_argument('-t', '--debug', help="", action="store_true")
+
         # TODO
         # self.parser.add_argument('--clean', help="")
 
@@ -61,7 +65,7 @@ class TodoList:
             # Split the args into the id and description
             self.dal.add_description(args.description[0], args.description[1::])
         elif args.due:
-            pass
+            self.dal.add_due_date(args.due[0], args.due[1])
 
         if args.remove:
             self.dal.remove_by_id(args.remove)

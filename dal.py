@@ -58,7 +58,16 @@ class DAL:
         except ValueError:
             print 'ID of item should be the first element supplied to description'
 
+    def add_due_date(self, item_id, date_due):
+        try:
+            item_id = int(item_id)
+            cursor = self.database_connection.cursor()
+            date = self._get_date_from_string(date_due)
+            cursor.execute("UPDATE todo_list SET due = ? WHERE rowid = ?", (date, item_id,))
+            self.database_connection.commit()
 
+        except ValueError:
+            print 'ID of item should be the first element supplied to due'
     # TODO
     # def clean_database(self):
     #
@@ -80,7 +89,8 @@ class DAL:
 
         date = None
         if due_date:
-            date = self._get_date_from_string(due_date)
+            # Assume that the first element is the date if its passed in with the --add flag
+            date = self._get_date_from_string(due_date[0])
 
         description = ''
         if description_elements:
