@@ -120,9 +120,13 @@ class DAL:
         try:
             date = datetime.datetime.strptime(date_string, '%d-%b')
             date = date.replace(year=today.year)
+            # If date is in the past, then add a year to put it in the future
+            if date.date() - today:
+                date = date.replace(year=today.year + 1)
             return date.strftime("%Y-%m-%d")
         except ValueError:
             pass
+
 
         # TODO - Should handle unknown date here
 
