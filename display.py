@@ -42,8 +42,6 @@ class Display:
             elif 'Today' in value:
                 value = term.color(value, 'WARNING')
             elif 'Tomorrow' in value:
-                value = term.color(value, 'MILD')
-            else:
                 value = term.color(value, 'OK')
         return value
 

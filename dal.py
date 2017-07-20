@@ -59,13 +59,13 @@ class DAL:
             print 'ID of item should be the first element supplied to description'
 
 
-
-    def clean_database(self):
-
-        # TODO - Archive everything marked as done
-        # Should also accept ids, then only archive that item
-        # Should prompt user on mass archive
-        pass
+    # TODO
+    # def clean_database(self):
+    #
+    #     # TODO - Archive everything marked as done
+    #     # Should also accept ids, then only archive that item
+    #     # Should prompt user on mass archive
+    #     pass
 
     def get_item_description(self, rowid):
         self.database_connection.row_factory = self.dict_factory
@@ -74,15 +74,22 @@ class DAL:
         # There can only be one
         return cursor.fetchone()
 
-    def add_to_cmdo_list(self, message, due_date, priority=0):
+    def add_to_cmdo_list(self, message, due_date, description_elements, priority=0):
         message = ' '.join(message)
         cursor = self.database_connection.cursor()
-        # print 'Added "'+message+'" to todo list with priority', priority
+
+        date = None
         if due_date:
-            due_date = self._get_date_from_string(due_date)
-            cursor.execute("INSERT INTO todo_list (title, priority, due) VALUES (?, ?, ? )", (message, priority, due_date, ))
-        else:
-            cursor.execute("INSERT INTO todo_list (title, priority) VALUES (?, ? )", (message, priority,))
+            date = self._get_date_from_string(due_date)
+
+        description = ''
+        if description_elements:
+            # If description is passed in with add ignore the id field. Assume that it isn't included
+            description = ' '.join(description_elements)
+
+        cursor.execute("INSERT INTO todo_list (title, priority, due, description) VALUES (?, ?, ?, ?)", (message, priority, date, description,))
+
+
         self.database_connection.commit()
 
     def _get_date_from_string(self, date_string):

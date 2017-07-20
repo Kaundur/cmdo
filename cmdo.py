@@ -26,7 +26,8 @@ class TodoList:
         self.parser.add_argument('-t', '--debug', help="",  action="store_true")
         self.parser.add_argument('--description', help="", nargs="*")
         self.parser.add_argument('--vacuum', help="", action="store_true")
-        self.parser.add_argument('--clean', help="")
+        # TODO
+        # self.parser.add_argument('--clean', help="")
 
         args = self.parser.parse_args()
 
@@ -54,14 +55,14 @@ class TodoList:
 
         if args.add:
             # TODO - Should handle description here as well
-            due_date = None
-            if args.due:
-                due_date = args.due
-            self.dal.add_to_cmdo_list(args.add, due_date)
+            self.dal.add_to_cmdo_list(args.add, args.due, args.description)
             display_list = True
-        if args.description and not args.add:
+        elif args.description:
             # Split the args into the id and description
             self.dal.add_description(args.description[0], args.description[1::])
+        elif args.due:
+            pass
+
         if args.remove:
             self.dal.remove_by_id(args.remove)
             display_list = True
@@ -79,8 +80,9 @@ class TodoList:
             self.dal.vacuum_id()
             display_list = True
 
-        if args.clean:
-            self.dal.clean_database()
+        # TODO
+        # if args.clean:
+        #     self.dal.clean_database()
         if args.view:
             self.display_details(args.view[0])
         if display_list:
