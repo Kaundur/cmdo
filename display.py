@@ -94,11 +94,11 @@ class Display:
         print "\tMark done    --done   -d"
 
     def display_logo(self):
-        print '_________          _________'
-        print '__  ____/______ _________  /_____'
-        print '_  /    __  __ `__ \  __  /_  __ \ '
-        print '/ /___  _  / / / / / /_/ / / /_/ /'
-        print '\____/  /_/ /_/ /_/\__,_/  \____/'
+        print '          _________          _________'
+        print '          __  ____/______ _________  /_____'
+        print '          _  /    __  __ `__ \  __  /_  __ \ '
+        print '          / /___  _  / / / / / /_/ / / /_/ /'
+        print '          \____/  /_/ /_/ /_/\__,_/  \____/'
         print ''
 
     def __get_date(self, date_string):
