@@ -117,14 +117,14 @@ class DAL:
                 next_day_string = next_day.strftime("%A")
                 if date_string.lower() == next_day_string.lower():
                     return next_day
-
         try:
             date = datetime.datetime.strptime(date_string, '%d-%b')
             date = date.replace(year=today.year)
             return date.strftime("%Y-%m-%d")
-        except:
+        except ValueError:
             pass
-        # exit()
+
+        # TODO - Should handle unknown date here
 
         return date_string
 
