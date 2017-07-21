@@ -1,5 +1,6 @@
 import os
 import datetime
+import re
 
 import term
 
@@ -43,6 +44,18 @@ class Display:
                 value = term.color(value, 'WARNING')
             elif 'Tomorrow' in value:
                 value = term.color(value, 'OK')
+        if item == 'title':
+            if '#' or '@' in value:
+
+                words = value.split(' ')
+                for i, word in enumerate(words):
+                    if '#' in word:
+                        word = term.color(word, 'BLUE')
+                        words[i] = word
+                    elif '@' in word:
+                        word = term.color(word, 'CYAN')
+                        words[i] = word
+                value = ' '.join(words)
         return value
 
     def format_value(self, value, item):

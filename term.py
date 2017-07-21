@@ -8,6 +8,8 @@ colors = {
     'MILD': '\033[94m',
     'OK': '\033[92m',
     'RESET': '\033[0m',
+    'BLUE': '\033[94m',
+    'CYAN': '\033[96m',
 }
 
 def color(text, color):
