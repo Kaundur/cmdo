@@ -26,6 +26,8 @@ class TodoList:
         self.parser.add_argument('-description', help="Add description to item", nargs="*")
         self.parser.add_argument('-due', help="Add due date to item", nargs="*")
 
+        self.parser.add_argument('-welcome', help="Display welcome message", action="store_true")
+
         self.parser.add_argument('-vacuum', help="Vacuum database ids", action="store_true")
         self.parser.add_argument('-debug', help="Dump database to screen", action="store_true")
 
@@ -82,6 +84,9 @@ class TodoList:
         if args.vacuum:
             self.dal.vacuum_id()
             display_list = True
+
+        if args.welcome:
+            self.display.display_welcome()
 
         # TODO
         # if args.clean:

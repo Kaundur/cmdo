@@ -77,14 +77,13 @@ class Display:
         return ('{:<' + str(format_length) + '}').format(value)
 
     def show_list(self, todo_list):
-        self.clear_terminal()
-        self.display_logo()
         if todo_list:
+            self.clear_terminal()
+            self.display_logo()
             for row in todo_list:
                 self.print_row(row)
         else:
             self.display_welcome()
-
 
     def display_details(self, row):
         if row:
@@ -100,13 +99,18 @@ class Display:
         os.system('cls' if os.name == 'nt' else 'clear')
 
     def display_welcome(self):
+        self.clear_terminal()
+        self.display_logo()
         print 'Command List'
-        print "\tAdd item               -add"
-        print "\tAdd due date           -due"
-        print "\tAdd description        -description"
-        print "\tMark item done         -done"
-        print "\tMark item not done     -undone"
-        print "\tView items             -view"
+        print "\t"+term.color("Add item", 'CYAN')+"               "+term.color('-add', 'OK')
+        print "\t"+term.color("Add due date", 'CYAN')+"           "+term.color('-due', 'OK')
+        print "\t"+term.color("Add description", 'CYAN')+"        "+term.color('-description', 'OK')
+        print "\t"+term.color("Mark item done", 'CYAN')+"         "+term.color('-done', 'OK')
+        print "\t"+term.color("Mark item not done", 'CYAN')+"     "+term.color('-undone', 'OK')
+        print "\t"+term.color("View items", 'CYAN')+"             "+term.color('-view', 'OK')
+        print ""
+        print "\t"+term.color("Vacuum IDs", 'CYAN')+"             "+term.color('-vacuum', 'DANGER')
+        print "\t"+term.color("Dump to screen", 'CYAN')+"         "+term.color('-debug', 'DANGER')
 
 
     def display_logo(self):
