@@ -91,7 +91,7 @@ class Display:
             if row['description'] is not None and row['description'] != '':
                 print "\t"+self.color_value(row['description'], 'description')
             else:
-                print "\tNo description added. Add a description using --description ID description"
+                print "\tNo description added. Add a description using -description ID description"
         else:
             print 'No task found'
 
