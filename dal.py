@@ -126,8 +126,11 @@ class DAL:
             return date.strftime("%Y-%m-%d")
         except ValueError:
             pass
-
-
+        try:
+            date = datetime.datetime.strptime(date_string, '%d-%b-%Y')
+            return date.strftime("%Y-%m-%d")
+        except ValueError:
+            pass
         # TODO - Should handle unknown date here
 
         return date_string
