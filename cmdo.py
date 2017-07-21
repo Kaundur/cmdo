@@ -15,26 +15,25 @@ class TodoList:
 
         self.display = display.Display()
 
-        self.parser.add_argument('-add', help="", type=str, nargs="+")
+        self.parser.add_argument('-add', help="Add a new item to Cmdo", type=str, nargs="+")
 
-        self.parser.add_argument('-remove', help="", type=int)
-        self.parser.add_argument('-done', help="", type=int)
-        self.parser.add_argument('-undone', help="", type=int)  # Revert done
+        self.parser.add_argument('-remove', help="Remove item", type=int)
+        self.parser.add_argument('-done', help="Mark item as done", type=int)
+        self.parser.add_argument('-undone', help="Mark item as not done", type=int)  # Revert done
         # should be 0 or 1 arg here
-        self.parser.add_argument('-view', help="", type=int, nargs='*')
+        self.parser.add_argument('-view', help="View list or view item", type=int, nargs='*')
 
-        self.parser.add_argument('-description', help="", nargs="*")
-        self.parser.add_argument('-due', help="", nargs="*")
+        self.parser.add_argument('-description', help="Add description to item", nargs="*")
+        self.parser.add_argument('-due', help="Add due date to item", nargs="*")
 
-        self.parser.add_argument('-vacuum', help="", action="store_true")
+        self.parser.add_argument('-vacuum', help="Vacuum database ids", action="store_true")
+        self.parser.add_argument('-debug', help="Dump database to screen", action="store_true")
 
-        self.parser.add_argument('-debug', help="", action="store_true")
 
         # TODO
         # self.parser.add_argument('--clean', help="")
 
         args = self.parser.parse_args()
-
         if self.check_arguments(args):
             self.handle_arguments(args)
         else:
