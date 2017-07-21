@@ -1,6 +1,6 @@
 import os
 import datetime
-import re
+
 
 import term
 
@@ -101,10 +101,13 @@ class Display:
 
     def display_welcome(self):
         print 'Command List'
-        print "\tShow list    --list   -l"
-        print "\tAdd item     --add    -a"
-        print "\tRemove item  --remove -r"
-        print "\tMark done    --done   -d"
+        print "\tAdd item               -add"
+        print "\tAdd due date           -due"
+        print "\tAdd description        -description"
+        print "\tMark item done         -done"
+        print "\tMark item not done     -undone"
+        print "\tView items             -view"
+
 
     def display_logo(self):
         print '          _________          _________'
