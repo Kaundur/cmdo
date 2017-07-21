@@ -44,7 +44,7 @@ class Display:
                 value = term.color(value, 'WARNING')
             elif 'Tomorrow' in value:
                 value = term.color(value, 'OK')
-        if item == 'title':
+        if item == 'title' or item == 'description':
             if '#' or '@' in value:
 
                 words = value.split(' ')
@@ -90,7 +90,7 @@ class Display:
         if row:
             self.print_row(row)
             if row['description'] is not None and row['description'] != '':
-                print "\t"+row['description']
+                print "\t"+self.color_value(row['description'], 'description')
             else:
                 print "\tNo description added. Add a description using --description ID description"
         else:
