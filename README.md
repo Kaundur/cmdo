@@ -9,6 +9,9 @@ Running cmdo.py will create the SQLite database
   <dt>Default</dt>
   <dd>No parameters will display todo list, or display welcome if there are no items in the list</dd>
 
+  <dt>-welcome</dt>
+  <dd>Displays splash screen</dd>
+  
   <dt>-add title</dt>
   <dd>add an item to the todo list with a title</dd>
 
@@ -47,17 +50,43 @@ Running cmdo.py will create the SQLite database
 
 ## Examples
 Add "test item" to the todo list
+
+```
 >cmdo.py -add test item
+1    [ ]       test item
+```
 
 Add "test item" with description "new test item" to the todo list
+
+```
 >cmdo.py -add test item -description new test item
+2    [ ]       test item
+```
 
 Add "test item" with due date 20/05/2020
+
+```
 >cmdo.py -add test item -due 20-may-2020
+3    [ ]       test item                     2020-05-20
+```
 
 Add "test item" with due date tomorrow
+
+```
 >cmdo.py -add test item -due tomorrow
+4   [ ]       test item                     Tomorrow
+```
 
 Update due date on item with id 5 to next friday
->cmdo.py -due 5 friday
 
+```
+>cmdo.py -due 5 friday
+5   [ ]       test item                     Friday
+```
+
+Mark item 5 as done
+
+```
+>cmdo.py -done 5
+5   [x]       test item                     Friday
+```
