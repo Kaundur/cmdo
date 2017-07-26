@@ -1,3 +1,4 @@
+import os
 
 # TOOD - Are these valid on unix
 # http://misc.flogisoft.com/bash/tip_colors_and_formatting
@@ -17,6 +18,10 @@ def color(text, color):
         return ''.join([colors[color], text, colors['RESET']])
     return text
 
+
+def reset_terminal():
+    # TODO - Check if this works on unix
+    os.system('color')
 
 # HEADER = '\033[95m'
 # OKBLUE = '\033[94m'

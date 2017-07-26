@@ -5,7 +5,7 @@ import os
 
 import display
 import dal
-
+import term
 
 class TodoList:
     def __init__(self):
@@ -43,7 +43,7 @@ class TodoList:
             self.display_list()
 
         self.dal.close_connection()
-        self.reset_terminal()
+        term.reset_terminal()
 
     def check_arguments(self, args):
         any_arg_set = False
@@ -103,9 +103,7 @@ class TodoList:
         cmdo_list = self.dal.get_cmdo_list()
         self.display.show_list(cmdo_list)
 
-    def reset_terminal(self):
-        # TODO - Check if this works on unix
-        os.system('color')
+
 
 td_list = TodoList()
 
