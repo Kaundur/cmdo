@@ -99,7 +99,6 @@ class DAL:
 
         cursor.execute("INSERT INTO todo_list (title, priority, due, description) VALUES (?, ?, ?, ?)", (message, priority, date, description,))
 
-
         self.database_connection.commit()
 
     def _get_date_from_string(self, date_string):
