@@ -22,7 +22,7 @@ Running cmdo.py will create the SQLite database
 
 * YYYY-MM-DD
 * DD-MON-YYYY
-* DD-MON
+* DD-MON. Will set the year to the current year, or next year if the date has passed
 * Today
 * Tomorrow
 * Day name [monday to sunday] will set the date to the next date when this day occurs
