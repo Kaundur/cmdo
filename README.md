@@ -52,6 +52,8 @@ Running cmdo.py will create the SQLite database
   <dd> Reorders the table so that there are no numerical gaps between item ids</dd>
 <dl>
 
+Tags @ and # can be used to better emphasise a title or description by changing the font color
+
 ## Examples
 Add "test item" to the todo list
 
