@@ -1,7 +1,11 @@
 # CMDO
 A command line todo list tool using Python and SQLite
 
+![Cmdo](https://user-images.githubusercontent.com/8157119/28658090-9a77f6e0-72a1-11e7-8b5a-1a7c28f9d039.PNG)
+
 ## Installation
+Python 2 required
+
 Running cmdo.py will create the SQLite database
 
 ## Commands
