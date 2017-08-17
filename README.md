@@ -5,8 +5,9 @@ A command line todo list tool using Python and SQLite
 
 ## Installation
 Python 2 required
-
-Running cmdo.py will create the SQLite database
+```
+pip install cmdo-app
+```
 
 ## Commands
 <dl>
