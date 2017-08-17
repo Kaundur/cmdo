@@ -1,6 +1,5 @@
-import os
 import datetime
-
+import os
 
 import term
 
@@ -102,15 +101,15 @@ class Display:
         self.clear_terminal()
         self.display_logo()
         print 'Command List'
-        print "\t"+term.color("Add item", 'CYAN')+"               "+term.color('-add', 'OK')
-        print "\t"+term.color("Add due date", 'CYAN')+"           "+term.color('-due', 'OK')
-        print "\t"+term.color("Add description", 'CYAN')+"        "+term.color('-description', 'OK')
-        print "\t"+term.color("Mark item done", 'CYAN')+"         "+term.color('-done', 'OK')
-        print "\t"+term.color("Mark item not done", 'CYAN')+"     "+term.color('-undone', 'OK')
-        print "\t"+term.color("View items", 'CYAN')+"             "+term.color('-view', 'OK')
+        print "\t" + term.color("Add item", 'CYAN') + "               " + term.color('-add', 'OK')
+        print "\t" + term.color("Add due date", 'CYAN') + "           " + term.color('-due', 'OK')
+        print "\t" + term.color("Add description", 'CYAN') + "        " + term.color('-description', 'OK')
+        print "\t" + term.color("Mark item done", 'CYAN') + "         " + term.color('-done', 'OK')
+        print "\t" + term.color("Mark item not done", 'CYAN') + "     " + term.color('-undone', 'OK')
+        print "\t" + term.color("View items", 'CYAN') + "             " + term.color('-view', 'OK')
         print ""
-        print "\t"+term.color("Vacuum IDs", 'CYAN')+"             "+term.color('-vacuum', 'DANGER')
-        print "\t"+term.color("Dump to screen", 'CYAN')+"         "+term.color('-debug', 'DANGER')
+        print "\t" + term.color("Vacuum IDs", 'CYAN') + "             " + term.color('-vacuum', 'DANGER')
+        print "\t" + term.color("Dump to screen", 'CYAN') + "         " + term.color('-debug', 'DANGER')
 
 
     def display_logo(self):

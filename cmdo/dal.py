@@ -1,10 +1,11 @@
 import sqlite3
 import datetime
-
+import os
+import sys
 
 class DAL:
     def __init__(self):
-        self.database_name = 'cmdo.db'
+        self.database_name = os.path.join(os.path.dirname(os.path.realpath(sys.argv[0])), 'cmdo.db')
         self.database_connection = sqlite3.connect(self.database_name)
         self.initalise_database()
 

@@ -1,14 +1,14 @@
-#!/usr/bin/python
-import sys
 import argparse
-import os
 
-import display
 import dal
+import display
 import term
 
 class TodoList:
     def __init__(self):
+
+
+
         self.parser = argparse.ArgumentParser(description='')
 
         self.dal = dal.DAL()
@@ -44,6 +44,7 @@ class TodoList:
 
         self.dal.close_connection()
         term.reset_terminal()
+        return
 
     def check_arguments(self, args):
         any_arg_set = False
@@ -103,8 +104,7 @@ class TodoList:
         cmdo_list = self.dal.get_cmdo_list()
         self.display.show_list(cmdo_list)
 
+def run_cmdo():
+    TodoList()
 
-
-td_list = TodoList()
-
-
+run_cmdo()
