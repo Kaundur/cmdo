@@ -4,10 +4,9 @@ import dal
 import display
 import term
 
+
 class TodoList:
     def __init__(self):
-
-
 
         self.parser = argparse.ArgumentParser(description='')
 
@@ -103,6 +102,7 @@ class TodoList:
     def display_list(self):
         cmdo_list = self.dal.get_cmdo_list()
         self.display.show_list(cmdo_list)
+
 
 def run_cmdo():
     TodoList()

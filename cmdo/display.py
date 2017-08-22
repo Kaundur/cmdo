@@ -111,7 +111,6 @@ class Display:
         print "\t" + term.color("Vacuum IDs", 'CYAN') + "             " + term.color('-vacuum', 'DANGER')
         print "\t" + term.color("Dump to screen", 'CYAN') + "         " + term.color('-debug', 'DANGER')
 
-
     def display_logo(self):
         print '          _________          _________'
         print '          __  ____/______ _________  /_____'
@@ -130,12 +129,10 @@ class Display:
 
         delta = item_date.date() - today
 
-
         if delta.days < 0:
             if delta.days == -1:
                 return 'Yesterday'
             return str(abs(delta.days)) + ' days ago'
-
 
         if item_date.date() == datetime.date.today():
             return 'Today'

@@ -3,6 +3,7 @@ import datetime
 import os
 import sys
 
+
 class DAL:
     def __init__(self):
         self.database_name = os.path.join(os.path.dirname(os.path.realpath(sys.argv[0])), 'cmdo.db')
