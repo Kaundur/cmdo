@@ -5,8 +5,9 @@ A command line todo list tool using Python and SQLite
 
 ## Installation
 Python 2 required
-
-Running cmdo.py will create the SQLite database
+```
+pip install cmdo-app
+```
 
 ## Commands
 <dl>
@@ -58,41 +59,41 @@ Tags @ and # can be used to better emphasise a title or description by changing 
 Add "test item" to the todo list
 
 ```
->cmdo.py -add test item
+>cmdo -add test item
 1    [ ]       test item
 ```
 
 Add "test item" with description "new test item" to the todo list
 
 ```
->cmdo.py -add test item -description new test item
+>cmdo -add test item -description new test item
 2    [ ]       test item
 ```
 
 Add "test item" with due date 20/05/2020
 
 ```
->cmdo.py -add test item -due 20-may-2020
+>cmdo -add test item -due 20-may-2020
 3    [ ]       test item                     2020-05-20
 ```
 
 Add "test item" with due date tomorrow
 
 ```
->cmdo.py -add test item -due tomorrow
+>cmdo -add test item -due tomorrow
 4   [ ]       test item                     Tomorrow
 ```
 
 Update due date on item with id 5 to next friday
 
 ```
->cmdo.py -due 5 friday
+>cmdo -due 5 friday
 5   [ ]       test item                     Friday
 ```
 
 Mark item 5 as done
 
 ```
->cmdo.py -done 5
+>cmdo -done 5
 5   [x]       test item                     Friday
 ```
