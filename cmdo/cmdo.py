@@ -57,7 +57,6 @@ class TodoList:
     def handle_arguments(self, args):
         display_list = False
         # TODO - Display list is happening too many times here, it could be called multiple times depending on the operation
-        print args
         if args.add:
             # TODO - Should handle description here as well
             self.dal.add_to_cmdo_list(args.add, args.due, args.description)
@@ -106,4 +105,3 @@ class TodoList:
 
 def run_cmdo():
     TodoList()
-

@@ -58,7 +58,7 @@ class DAL:
             self.database_connection.commit()
 
         except ValueError:
-            print 'ID of item should be the first element supplied to description'
+            print('ID of item should be the first element supplied to description')
 
     def add_due_date(self, item_id, date_due):
         try:
@@ -69,7 +69,7 @@ class DAL:
             self.database_connection.commit()
 
         except ValueError:
-            print 'ID of item should be the first element supplied to due'
+            print('ID of item should be the first element supplied to due')
     # TODO
     # def clean_database(self):
     #
@@ -159,7 +159,7 @@ class DAL:
         cursor = self.database_connection.cursor()
         cmdo_list = cursor.execute('SELECT * FROM todo_list')
         for row in cmdo_list:
-            print row
+            print(row)
 
     def close_connection(self):
         self.database_connection.close()

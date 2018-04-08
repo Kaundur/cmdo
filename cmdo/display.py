@@ -31,7 +31,7 @@ class Display:
                 value = self.truncate_value(value, layout_length)
                 value = self.color_value(value, layout)
                 row += value
-        print row
+        print(row)
 
     def color_value(self, value, item):
         if item == 'due':
@@ -88,11 +88,11 @@ class Display:
         if row:
             self.print_row(row)
             if row['description'] is not None and row['description'] != '':
-                print "\t"+self.color_value(row['description'], 'description')
+                print("\t"+self.color_value(row['description'], 'description'))
             else:
-                print "\tNo description added. Add a description using -description ID description"
+                print("\tNo description added. Add a description using -description ID description")
         else:
-            print 'No task found'
+            print('No task found')
 
     def clear_terminal(self):
         os.system('cls' if os.name == 'nt' else 'clear')
@@ -100,24 +100,24 @@ class Display:
     def display_welcome(self):
         self.clear_terminal()
         self.display_logo()
-        print 'Command List'
-        print "\t" + term.color("Add item", 'CYAN') + "               " + term.color('-add', 'OK')
-        print "\t" + term.color("Add due date", 'CYAN') + "           " + term.color('-due', 'OK')
-        print "\t" + term.color("Add description", 'CYAN') + "        " + term.color('-description', 'OK')
-        print "\t" + term.color("Mark item done", 'CYAN') + "         " + term.color('-done', 'OK')
-        print "\t" + term.color("Mark item not done", 'CYAN') + "     " + term.color('-undone', 'OK')
-        print "\t" + term.color("View items", 'CYAN') + "             " + term.color('-view', 'OK')
-        print ""
-        print "\t" + term.color("Vacuum IDs", 'CYAN') + "             " + term.color('-vacuum', 'DANGER')
-        print "\t" + term.color("Dump to screen", 'CYAN') + "         " + term.color('-debug', 'DANGER')
+        print('Command List')
+        print("\t" + term.color("Add item", 'CYAN') + "               " + term.color('-add', 'OK'))
+        print("\t" + term.color("Add due date", 'CYAN') + "           " + term.color('-due', 'OK'))
+        print("\t" + term.color("Add description", 'CYAN') + "        " + term.color('-description', 'OK'))
+        print("\t" + term.color("Mark item done", 'CYAN') + "         " + term.color('-done', 'OK'))
+        print("\t" + term.color("Mark item not done", 'CYAN') + "     " + term.color('-undone', 'OK'))
+        print("\t" + term.color("View items", 'CYAN') + "             " + term.color('-view', 'OK'))
+        print("")
+        print("\t" + term.color("Vacuum IDs", 'CYAN') + "             " + term.color('-vacuum', 'DANGER'))
+        print("\t" + term.color("Dump to screen", 'CYAN') + "         " + term.color('-debug', 'DANGER'))
 
     def display_logo(self):
-        print '          _________          _________'
-        print '          __  ____/______ _________  /_____'
-        print '          _  /    __  __ `__ \  __  /_  __ \ '
-        print '          / /___  _  / / / / / /_/ / / /_/ /'
-        print '          \____/  /_/ /_/ /_/\__,_/  \____/'
-        print ''
+        print('          _________          _________')
+        print('          __  ____/______ _________  /_____')
+        print('          _  /    __  __ `__ \  __  /_  __ \ ')
+        print('          / /___  _  / / / / / /_/ / / /_/ /')
+        print('          \____/  /_/ /_/ /_/\__,_/  \____/')
+        print('')
 
     def __get_date(self, date_string):
         # TODO - need to handle multiple formats of date
