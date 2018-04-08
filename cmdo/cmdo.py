@@ -1,8 +1,7 @@
 import argparse
 
-import dal
-import display
-import term
+from . import dal
+from . import display
 
 
 class TodoList:
@@ -30,19 +29,13 @@ class TodoList:
         self.parser.add_argument('-vacuum', help="Vacuum database ids", action="store_true")
         self.parser.add_argument('-debug', help="Dump database to screen", action="store_true")
 
-
-        # TODO
-        # self.parser.add_argument('--clean', help="")
-
         args = self.parser.parse_args()
         if self.check_arguments(args):
             self.handle_arguments(args)
         else:
-            # If view is empty itll go here
             self.display_list()
 
         self.dal.close_connection()
-        term.reset_terminal()
         return
 
     def check_arguments(self, args):

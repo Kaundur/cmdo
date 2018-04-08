@@ -26,7 +26,8 @@ class DAL:
                       )''')
         self.database_connection.commit()
 
-    def dict_factory(self, cursor, row):
+    @staticmethod
+    def dict_factory(cursor, row):
         d = {}
         for idx, col in enumerate(cursor.description):
             d[col[0]] = row[idx]

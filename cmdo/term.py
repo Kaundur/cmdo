@@ -1,8 +1,3 @@
-import os
-
-# TOOD - Are these valid on unix
-# http://misc.flogisoft.com/bash/tip_colors_and_formatting
-
 colors = {
     'DANGER': '\033[91m',
     'WARNING': '\033[33m',
@@ -13,15 +8,11 @@ colors = {
     'CYAN': '\033[96m',
 }
 
-def color(text, color):
-    if color in colors:
-        return ''.join([colors[color], text, colors['RESET']])
+
+def color(text, text_color):
+    if text_color in colors:
+        return ''.join([colors[text_color], text, colors['RESET']])
     return text
-
-
-def reset_terminal():
-    # TODO - Check if this works on unix
-    os.system('color')
 
 # HEADER = '\033[95m'
 # OKBLUE = '\033[94m'
@@ -34,4 +25,3 @@ def reset_terminal():
 # NORMAL = '\033[0m'
 
 # This could be the reset command in windows, currently using os.system('color')
-

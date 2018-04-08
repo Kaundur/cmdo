@@ -1,7 +1,7 @@
 import datetime
 import os
 
-import term
+from . import term
 
 
 class Display:
@@ -17,7 +17,7 @@ class Display:
                               'due': {'length': 15},
                               'priority': {'length': 10},
                               'description': {'length': 40}
-                       }
+                              }
 
     def print_row(self, data):
         row = ''
@@ -33,7 +33,8 @@ class Display:
                 row += value
         print(row)
 
-    def color_value(self, value, item):
+    @staticmethod
+    def color_value(value, item):
         if item == 'due':
             if 'ago' in value:
                 value = term.color(value, 'DANGER')
@@ -70,7 +71,8 @@ class Display:
                 value = ''
         return value
 
-    def truncate_value(self, value, format_length):
+    @staticmethod
+    def truncate_value(value, format_length):
         if len(str(value)) > format_length:
             value = (value[:format_length-3] + '...')
         return ('{:<' + str(format_length) + '}').format(value)
@@ -94,7 +96,8 @@ class Display:
         else:
             print('No task found')
 
-    def clear_terminal(self):
+    @staticmethod
+    def clear_terminal():
         os.system('cls' if os.name == 'nt' else 'clear')
 
     def display_welcome(self):
@@ -111,7 +114,8 @@ class Display:
         print("\t" + term.color("Vacuum IDs", 'CYAN') + "             " + term.color('-vacuum', 'DANGER'))
         print("\t" + term.color("Dump to screen", 'CYAN') + "         " + term.color('-debug', 'DANGER'))
 
-    def display_logo(self):
+    @staticmethod
+    def display_logo():
         print('          _________          _________')
         print('          __  ____/______ _________  /_____')
         print('          _  /    __  __ `__ \  __  /_  __ \ ')
@@ -119,11 +123,12 @@ class Display:
         print('          \____/  /_/ /_/ /_/\__,_/  \____/')
         print('')
 
-    def __get_date(self, date_string):
+    @staticmethod
+    def __get_date(date_string):
         # TODO - need to handle multiple formats of date
         try:
             item_date = datetime.datetime.strptime(date_string, "%Y-%m-%d")
-        except:
+        except ValueError:
             return ''
         today = datetime.date.today()
 
